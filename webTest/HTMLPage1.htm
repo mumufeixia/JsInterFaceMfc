@@ -1,0 +1,182 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+    <title>竖向的折叠菜单</title>
+    <script language="JavaScript">
+    function showmenu(id) {
+        var list = document.getElementById("list" + id);
+        var menu = document.getElementById("menu" + id)
+        if (list.style.display == "none") {
+            document.getElementById("list" + id).style.display = "block";
+            menu.className = "title1";
+        } else {
+            document.getElementById("list" + id).style.display = "none";
+            menu.className = "title";
+        }
+            }
+//        apiready = function () {
+//            //重新赋值  
+//            vm_dataList.$data.list = josnobj.data;
+//        };
+//        //用于测试的json字符串  
+//        var json = '{"staus":1,"data":[{"id":"1","name":"信息公开指南","url":"???","parentid":"0","childnodes":[]},{"id":"2","name":"信息公开制度","url":"???","parentid":"0","childnodes":[]},{"id":"3","name":"年度公开报告","url":"???","parentid":"0","childnodes":[]},{"id":"4","name":"依申请公开","url":"???","parentid":"0","childnodes":[]},{"id":"5","name":"信息公开目录","url":"???","childnodes":[{"id":"6","name":"机构职能","url":"???","parentid":"5","childnodes":[{"id":"7","name":"省厅职责","url":"???","parentid":"6"},{"id":"8","name":"领导简介","url":"???","parentid":"6"}]},{"id":"9","name":"政府文件","url":"???","parentid":"5","childnodes":[{"id":"10","name":"环保部文件","url":"???","parentid":"9"},{"id":"11","name":"云环发","url":"???","parentid":"9"}]}]}]}';
+//        //将json字符串转为js对象  
+//        var josnobj = window.eval("(" + json + ")");
+//        vm_dataList = new Vue({
+//            el: '#menu',
+//            data: {
+//                list: []
+//            },
+//            methods: {
+//                toShow: toShow
+//            }
+//        })
+//        //JS实现控制动态展现闭合的方法  
+//        function toShow1() {
+//            //获得当前对象的下一个兄弟节点（此方法忽略"换行"等空白节点）,得到需要显示/隐藏的UL对象  
+//            var ul = thisobj.nextElementSibling;
+//            if (!ul) {
+//                return false;
+//            }
+//            //遍历触发事件(div)的父节点(UL)下的所有的LI标签  
+//            for (var _li = thisobj.parentNode.parentNode.childNodes, n = -1, li; li = _li[++n]; ) {
+//                if (li.tagName == "LI") {
+//                    for (var _ul = li.childNodes, t = -1, $ul; $ul = _ul[++t]; ) {
+//                        switch ($ul.tagName) {
+//                            //遍历LI标签下的UL标签(实际需要展现/隐藏的UL对象)    
+//                            case "UL":
+//                                //完成样式赋予,判断如果是触发事件的节点就完成样式切换,反之则设置其display样式为隐藏  
+//                                $ul.style.display = $ul != ul ? "none" : $ul.style.display == "block" ? "none" : "block";
+//                                break;
+//                            case "":
+//                                $ul.style.display = $ul != thisobj ? "none" : thisobj.style.display == "block" ? "none" : "block";
+//                                break;
+//                        }
+//                    }
+//                }
+//            }
+//        }  
+    function ShowMessageBox() {
+        if (cpp_object != null) {
+            var i = cpp_object.test1();
+            var s = 'abc:' + i;
+            cpp_object.ShowMessageBox(s);
+            
+        }
+    }
+    function GetProcessID() {
+        if (cpp_object != null) {
+            var id = cpp_object.GetProcessID();
+            document.getElementById("process_info").innerText = "本进程ID为：" + id;
+        }
+    }
+    function SaveCppObject(obj) {
+        cpp_object = obj;
+    }
+    var cpp_object;
+   function disptime(){
+     var today = new Date(); //获得当前时间
+     var hh = today.getHours();  //获得小时、分钟、秒
+     var mm = today.getMinutes();
+     var ss = today.getSeconds();
+     /*设置div的内容为当前时间*/
+     var i = cpp_object.test1();
+     document.getElementById("myclock").innerHTML = "<h1>现在是:" + hh + ":" + mm + ":" + ss +"           " + i+"<h1>";
+    
+    /*
+      使用setTimeout在函数disptime()体内再次调用setTimeout
+      设置定时器每隔1秒（1000毫秒），调用函数disptime()执行，刷新时钟显示
+    */
+      var myTime=setTimeout("disptime()",25);
+    }
+    </script>
+    <style type="text/css">
+<!--
+*{margin:0;padding:0;list-style:none;font-size:14px}
+#nav{margin:0px;text-align:center;line-height:25px;width:200px;}
+.title{background:#336699;color:#fff;border-bottom:1px solid #fff;cursor:pointer;}
+.title1{background:#888;color:#000;border-bottom:1px solid #666;cursor:pointer;}
+.content li{color:#336699;background:#ddd;border-bottom:1px solid #fff;}
+a{ text-decoration: none;display: block;}
+/*覆盖aui.css初始化的样式*/  
+            ul li ul, ul li ul li {  
+                margin-left: 22px;  
+            }  
+            /*子目录默认隐藏*/  
+            #menu ul li ul {  
+                display: none;  
+            }  
+            /*公开目录列表默认左边距*/  
+            .aui-list1 {  
+                margin-left: 16px;  
+            }  
+-->
+</style>
+</head>
+<body onload="disptime()">
+<!-- <div id="menu" class="aui-content aui-margin-b-15">  
+            <ul class="aui-list aui-list-in">  
+                <li class="aui-list-header">  
+                    <h1>信息公开</h1>  
+                </li>  
+                <li class="aui-list1" v-for="item in list">  
+                    <div class="aui-list-item-inner aui-list-item-arrow" @click="toShow()">  
+                        {{item.name}}  
+                    </div>  
+                    <ul  class="aui-list aui-list-in" >  
+                        <li class="aui-list" v-for="childnode in item.childnodes">  
+                            <div class="aui-list-item-inner aui-list-item-arrow" @click="toShow()">  
+                                {{childnode.name}}  
+                            </div>  
+                            <ul class="aui-list aui-list-in" >  
+                                <li class="aui-list-item" v-for="finalnode in childnode.childnodes">  
+                                    <div class="aui-list-item-label-icon">  
+                                        <i class="aui-iconfont aui-icon-edit"></i>  
+                                    </div>  
+                                    <div class="aui-list-item-inner" @click="toShow()">  
+                                        {{finalnode.name}}  
+                                    </div>  
+                                </li>  
+                            </ul>  
+                        </li>  
+                    </ul>  
+                </li>  
+            </ul>  
+        </div>  -->
+    <div id="nav">
+        <div class="title" id="menu1" onclick="showmenu('1') ">
+            Ajax下载</div>
+        <div id="list1" class="content" style="display: none">
+            <ul>
+                <li><a href="#A">jQuery</a></li>
+                <li>Extjs</li>
+                <li>Mootools</li>
+            </ul>
+        </div>
+        <div class="title" id="menu2" onclick="showmenu('2')">
+            网页代码</div>
+        <div id="list2" class="content" style="display: none">
+            <ul>
+                <li>菜单导航</li>
+                <li>层和布局</li>
+                <li>图片切换</li>
+            </ul>
+        </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <p id="process_info">
+    </p>
+    <button type="button" onclick="ShowMessageBox()">
+        MessageBox</button>
+    <br />
+    <button type="button" onclick="GetProcessID()">
+        Process ID</button>
+    <br />
+    <div id="myclock"></div>
+</body>
+</html>
